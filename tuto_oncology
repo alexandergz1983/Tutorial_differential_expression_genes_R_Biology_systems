@@ -1,0 +1,20 @@
+El conjunto de datos se basa en un estudio real: “Kim SK, Kim SY, Kim JH, Roh SA, Cho DH et al. (2014) Un clasificador de puntuación de riesgo basado en diecinueve genes predice el pronóstico de pacientes con cáncer colorrectal”.
+
+El artículo presenta un estudio sobre el cáncer colorrectal (CRC), que a menudo experimenta recurrencia y metástasis. Su objetivo fue identificar indicadores pronósticos, incluido cómo los pacientes responden a la quimioterapia. Utilizando datos de secuenciación de ARN (RNA-seq) de 18 pacientes con CRC, los investigadores identificaron genes asociados con la agresividad del cáncer. A partir de estos genes, se desarrolló y validó un sistema de puntuación de riesgo basado en 19 genes regulados por TREM1 o CTGF, dos reguladores activados en CRC.
+
+El estudio demostró que esta puntuación de riesgo es un indicador significativo del pronóstico, especialmente en pacientes con cáncer en etapa III. La puntuación TCA19 predijo de manera efectiva qué pacientes podrían beneficiarse de la quimioterapia adyuvante, incluso en pacientes mayores de 75 años, quienes comúnmente son excluidos de estos tratamientos. Este predictor ofrece una herramienta novedosa para identificar pacientes con alto riesgo y posibles beneficios de la quimioterapia, mejorando así las decisiones de tratamiento personalizadas.
+
+Además, el análisis molecular sugiere que la activación de los reguladores TREM1 y CTGF está fuertemente vinculada a la progresión y metástasis del CRC. El sistema de puntuación TCA19 también fue validado en varios cohortes de pacientes, mostrando su relevancia clínica para predecir la supervivencia libre de enfermedad.
+
+#####################################################################################################
+
+El conjunto de datos contiene datos de secuenciación de ARN de 18 sujetos, pero se tomaron muestras (y esto es muy importante) de diferentes tejidos de estos sujetos, tejido de intestino grueso normal, cáncer de colon primario y metástasis hepática progresiva (con origen en el colon)[1]. Dicho esto, el número final de muestras es en realidad 54[1]. Para este tutorial se utilizarán 37 muestras relevantes, 18 muestras normales y 19 muestras de cáncer de colon primario. ¿Por qué estas? Bueno, la lógica básica para cualquier descubrimiento potencial de biomarcadores es comparar las muestras de cáncer con muestras no cancerosas y ver las diferencias en sus expresiones genéticas.
+
+Se compararán las muestras de cáncer con las muestras normales en más de 50 000 genes y queremos identificar las diferencias de expresión entre ellas (las más importantes).
+
+¿Por qué es importante que estas muestras, tanto normales como cancerosas, se tomen de los mismos sujetos? Porque este diseño limita las variables de confusión que podrían afectar el análisis (la mayoría de las demás variables en este contexto son fijas), lo que permite una mejor inferencia causal de posibles oncogenes (esto se analizará más adelante).
+
+Se utilizará el paquete DESeq2 (Bioconductor) para realizar el análisis de expresión diferencial, identificando algunos genes potencialmente relevantes para la enfermedad a partir de un conjunto de datos de más de 50 000.
+
+¡Instale los paquetes y cargue los archivos del experimento y del conjunto de datos y veamos cómo se ven en R (RStudio)!
+
